@@ -15,21 +15,39 @@ const config = {
     devtool: 'eval-cheap-module-source-map',
     devServer: {
         static: {
-          directory: path.join(__dirname, './src/assets'),
+          directory: path.join(__dirname, 'src/assets'),
         },
         hot: true,
         port: 8000,
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src/components/')
+        }
+    },
     module: {
         rules: [
             {
-                test: /\.(jpe?g|png|gif|svg)$/,
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                exclude: path.resolve(__dirname, 'src/icons'),
                 use: [
                     {
                         loader: 'url-loader',
                         options: {
                             name:'[name].[ext]',
                             limit: 8192
+                        }
+                    }
+                ]
+            },
+            {
+                test:/\.svg$/i,
+                include: path.resolve(__dirname, 'src/icons'),
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            symbolId: 'Icon-[name]'
                         }
                     }
                 ]

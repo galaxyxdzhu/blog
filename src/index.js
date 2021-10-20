@@ -6,6 +6,8 @@ import 'normalize.css/normalize.css';
 import './assets/styles/index.scss';
 import routes from './router';
 
+import './icons';
+
 const router = new VueRouter(routes)
 
 Vue.use(VueRouter);
